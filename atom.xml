@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-08T08:52:34.081Z</updated>
+  <updated>2018-09-08T09:38:37.518Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>无锡</title>
+    <link href="http://yoursite.com/2018/09/08/%E6%97%A0%E9%94%A1/"/>
+    <id>http://yoursite.com/2018/09/08/无锡/</id>
+    <published>2018-09-08T09:37:01.000Z</published>
+    <updated>2018-09-08T09:38:37.518Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="life" scheme="http://yoursite.com/categories/life/"/>
+    
+    
+      <category term="日常" scheme="http://yoursite.com/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JAVA classloader</title>
     <link href="http://yoursite.com/2018/08/08/JAVA-classloader/"/>
     <id>http://yoursite.com/2018/08/08/JAVA-classloader/</id>
     <published>2018-08-08T04:53:41.000Z</published>
-    <updated>2018-09-08T08:52:34.081Z</updated>
+    <updated>2018-09-08T09:37:42.627Z</updated>
     
     <content type="html"><![CDATA[<h2 id="跟踪进度：统计和目标"><a href="#跟踪进度：统计和目标" class="headerlink" title="跟踪进度：统计和目标"></a>跟踪进度：统计和目标</h2><p>您是否看到了工具栏中的控制板按钮？它显示详细的文本统计，例如字符数、词数和页数，甚至是平均阅读时间。您还可以定制显示的统计量：只需打开面板，点按齿轮图标即可。</p><p>通过写作目标，您可以就特定词或字符限制跟踪进度，或者甚至针对特定阅读时间。此文稿的目标是“最多 300 个字符”–打开附件栏显示它。现在输入一些词。看到了吗？ </p><p>目标可以灵活设置，满足您的需求。试试吧：点按弹出窗口中的相应字段，将目标设置为“大约 150 个词”。</p><p>您还可以通过两点钟方位的“分享”图标将进度分享到社交媒体上。</p><p>提示： 统计和目标也可以通过其上下文菜单用于整个组。</p>]]></content>
     
@@ -36,6 +54,8 @@
     
       <category term="programming" scheme="http://yoursite.com/categories/programming/"/>
     
+    
+      <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
     
   </entry>
   
@@ -44,7 +64,7 @@
     <link href="http://yoursite.com/2016/11/22/JAVA-GC/"/>
     <id>http://yoursite.com/2016/11/22/JAVA-GC/</id>
     <published>2016-11-22T13:33:00.000Z</published>
-    <updated>2018-09-08T08:52:37.977Z</updated>
+    <updated>2018-09-08T09:37:44.857Z</updated>
     
     <content type="html"><![CDATA[<h2 id="跟踪进度：统计和目标"><a href="#跟踪进度：统计和目标" class="headerlink" title="跟踪进度：统计和目标"></a>跟踪进度：统计和目标</h2><p>您是否看到了工具栏中的控制板按钮？它显示详细的文本统计，例如字符数、词数和页数，甚至是平均阅读时间。您还可以定制显示的统计量：只需打开面板，点按齿轮图标即可。</p><p>通过写作目标，您可以就特定词或字符限制跟踪进度，或者甚至针对特定阅读时间。此文稿的目标是“最多 300 个字符”–打开附件栏显示它。现在输入一些词。看到了吗？ </p><p>目标可以灵活设置，满足您的需求。试试吧：点按弹出窗口中的相应字段，将目标设置为“大约 150 个词”。</p><p>您还可以通过两点钟方位的“分享”图标将进度分享到社交媒体上。</p><p>提示： 统计和目标也可以通过其上下文菜单用于整个组。</p>]]></content>
     
@@ -59,6 +79,8 @@
     
       <category term="programming" scheme="http://yoursite.com/categories/programming/"/>
     
+    
+      <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
     
   </entry>
   
