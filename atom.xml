@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Xia Xiang&#39;s Blog</title>
+  <title>Xia.Blog()</title>
   
-  <subtitle>Stay Hungry, Stay Foolish</subtitle>
+  <subtitle>Stay Hungry</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
