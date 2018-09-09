@@ -438,7 +438,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/08/JAVA-classloader/" itemprop="url">JAVA classloader</a></h1>
+                <a class="post-title-link" href="/2018/08/08/JAVA-classloader/" itemprop="url">JAVA ClassLoader</a></h1>
         
 
         <div class="post-meta">
@@ -521,14 +521,14 @@
 
       
         
-          
-            <h2 id="跟踪进度：统计和目标"><a href="#跟踪进度：统计和目标" class="headerlink" title="跟踪进度：统计和目标"></a>跟踪进度：统计和目标</h2><p>您是否看到了工具栏中的控制板按钮？它显示详细的文本统计，例如字符数、词数和页数，甚至是平均阅读时间。您还可以定制显示的统计量：只需打开面板，点按齿轮图标即可。</p>
-<p>通过写作目标，您可以就特定词或字符限制跟踪进度，或者甚至针对特定阅读时间。此文稿的目标是“最多 300 个字符”–打开附件栏显示它。现在输入一些词。看到了吗？ </p>
-<p>目标可以灵活设置，满足您的需求。试试吧：点按弹出窗口中的相应字段，将目标设置为“大约 150 个词”。</p>
-<p>您还可以通过两点钟方位的“分享”图标将进度分享到社交媒体上。</p>
-<p>提示： 统计和目标也可以通过其上下文菜单用于整个组。</p>
-
-          
+          <h2 id="类加载器的基本概念"><a href="#类加载器的基本概念" class="headerlink" title="类加载器的基本概念"></a>类加载器的基本概念</h2><p>顾名思义，类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。类加载器负责读取 Java 字节代码，并转换成 java.lang.Class类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 newInstance()方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。基本上所有的类加载器都是 java.lang.ClassLoader类的一个实例。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/08/JAVA-classloader/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
