@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="日常," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一座小城，无事可记 = =🐳🐳🐳">
-<meta name="keywords" content="日常">
+<meta name="description" content="Out of memoryOOM Killer原理">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无锡">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/无锡/index.html">
+<meta property="og:title" content="OOM Killer">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/oom/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta property="og:description" content="Out of memoryOOM Killer原理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T14:46:47.224Z">
+<meta property="og:updated_time" content="2019-07-05T09:53:50.960Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无锡">
-<meta name="twitter:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta name="twitter:title" content="OOM Killer">
+<meta name="twitter:description" content="Out of memoryOOM Killer原理">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/无锡/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/01/oom/"/>
 
 
 
 
 
-  <title>无锡 | Xia.Blog()</title>
+  <title>OOM Killer | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/无锡/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/oom/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">无锡</h1>
+          <h1 class="post-title" itemprop="name headline">OOM Killer</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:37:01+08:00">
-                2019-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-01T23:55:00+08:00">
+                2019-03-01
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/28/无锡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/无锡/" itemprop="commentCount"></span>
+                <a href="/2019/03/01/oom/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/01/oom/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,29 @@
       
 
       
-        <h2 id="一座小城，无事可记"><a href="#一座小城，无事可记" class="headerlink" title="一座小城，无事可记 = ="></a>一座小城，无事可记 = =</h2><p>🐳🐳🐳</p>
+        <h2 id="Out-of-memory"><a href="#Out-of-memory" class="headerlink" title="Out of memory"></a>Out of memory</h2><h4 id="OOM-Killer原理"><a href="#OOM-Killer原理" class="headerlink" title="OOM Killer原理"></a>OOM Killer原理<a id="more"></a></h4><ul>
+<li>当物理内存和交换空间爆满时，OOM Killer会计算每个进程的oom_score并选择杀死进程。oom_score的值越大就越有可能被 OOM Killer 选中。这里列举两个主要因素：</li>
+</ul>
+<p>进程消耗的内存越大，oom_score越大<br>进程运行消耗的CPU时间越小，oom_score越大</p>
+<ul>
+<li>Windows下没有OOM Killer机制，用户只能强制杀死进程或者重启机器。</li>
+</ul>
+<h4 id="内存溢出OOM判断和dump获取"><a href="#内存溢出OOM判断和dump获取" class="headerlink" title="内存溢出OOM判断和dump获取"></a>内存溢出OOM判断和dump获取</h4><pre><code>内存溢出的导致无响应的主要原因，是由于JVM的内存全部耗光，但是依然需要进一步分配内存。此时JVM就会进行很多次的的Full GC，希望回收不使用的内存。但是由于数据都在使用，因此一直释放不掉内存，于是就一遍遍的进行Full GC。
+
+按照以下办法判断是因为内存溢出导致的宕机
+
+利用top命令发现进程的CPU使用率非常高。
+CPU高并不一定是在做Full GC，需要进一步确认。利用jstat -gc pid 2000 2000 这一命令。如下代码块所示，关注FGC一栏，如果数值增加很快，而且FGCT(Full GC 的总时间)数值很大，例如FGC 为20 FGCT已经2000以上，平均一次FGC耗时100s。这里就可以确定是内存溢出了导致的宕机，需要获取dump
+满足上面条件才认为是内存溢出，否则不在这个内存溢出处理范畴内。
+优先通过配置来让JVM自己生产dump，但是如果没有配置的话那就是手动获取。执行“ jmap -dump:format=b,live,file=路径   进程pid”，例如 代码块中获取22374进程的dump。
+如果客户环境没有配置JVM进行dump的参数，需要加上以防万一。配置宕机文件自动生成
+</code></pre><h4 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oom_adj=15时，必然会被OOM Killer选中</span></span><br><span class="line">echo <span class="number">15</span> &gt; /proc/[PID]/oom_adj</span><br><span class="line"><span class="comment">// 手动触发OOM Killer</span></span><br><span class="line">echo f &gt; /proc/sysrq-trigger</span><br></pre></td></tr></table></figure>
+<h4 id="监测宕机-（信号量-JVM-Shutdown-Hook）"><a href="#监测宕机-（信号量-JVM-Shutdown-Hook）" class="headerlink" title="监测宕机 （信号量 + JVM Shutdown Hook）"></a>监测宕机 （信号量 + JVM Shutdown Hook）</h4><ul>
+<li><p>信号量<br>利用sun.misc.SignalHandler类，可以监听除了kill -9之外的其他关闭信号。Java对每个信号量都启动一个线程进行处理，注册信号量后会启动”SIGTERM handler” 线程。即便主线程被阻塞，信号依然可以得到处理。</p>
+</li>
+<li><p>JVM Shutdown Hook<br>当程序执行System.exit(0)退出时，信号量方法是无法知道的，这时候需要使用JVM Shutdown Hook。</p>
+</li>
+</ul>
 
       
     </div>
@@ -389,7 +411,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常/" rel="tag"><i class="fa fa-tag"></i> 日常</a>
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
           
         </div>
       
@@ -402,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
-                <i class="fa fa-chevron-left"></i> OOM Killer
+              <a href="/2019/02/11/javaassist/" rel="next" title="javaassist动态修改注解">
+                <i class="fa fa-chevron-left"></i> javaassist动态修改注解
               </a>
             
           </div>
@@ -411,6 +433,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/无锡/" rel="prev" title="无锡">
+                无锡 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -590,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一座小城，无事可记"><span class="nav-number">1.</span> <span class="nav-text">一座小城，无事可记 = =</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Out-of-memory"><span class="nav-number">1.</span> <span class="nav-text">Out of memory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OOM-Killer原理"><span class="nav-number">1.0.1.</span> <span class="nav-text">OOM Killer原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存溢出OOM判断和dump获取"><span class="nav-number">1.0.2.</span> <span class="nav-text">内存溢出OOM判断和dump获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试方法"><span class="nav-number">1.0.3.</span> <span class="nav-text">测试方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监测宕机-（信号量-JVM-Shutdown-Hook）"><span class="nav-number">1.0.4.</span> <span class="nav-text">监测宕机 （信号量 + JVM Shutdown Hook）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

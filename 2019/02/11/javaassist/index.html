@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="日常," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一座小城，无事可记 = =🐳🐳🐳">
-<meta name="keywords" content="日常">
+<meta name="description" content="JavaassistAnno ob变量加上了注解A，需要改成B。">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无锡">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/无锡/index.html">
+<meta property="og:title" content="javaassist动态修改注解">
+<meta property="og:url" content="http://yoursite.com/2019/02/11/javaassist/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta property="og:description" content="JavaassistAnno ob变量加上了注解A，需要改成B。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T14:46:47.224Z">
+<meta property="og:updated_time" content="2019-07-05T09:50:34.677Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无锡">
-<meta name="twitter:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta name="twitter:title" content="javaassist动态修改注解">
+<meta name="twitter:description" content="JavaassistAnno ob变量加上了注解A，需要改成B。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/无锡/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/11/javaassist/"/>
 
 
 
 
 
-  <title>无锡 | Xia.Blog()</title>
+  <title>javaassist动态修改注解 | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/无锡/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/javaassist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">无锡</h1>
+          <h1 class="post-title" itemprop="name headline">javaassist动态修改注解</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:37:01+08:00">
-                2019-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T23:55:00+08:00">
+                2019-02-11
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/28/无锡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/无锡/" itemprop="commentCount"></span>
+                <a href="/2019/02/11/javaassist/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/11/javaassist/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,9 @@
       
 
       
-        <h2 id="一座小城，无事可记"><a href="#一座小城，无事可记" class="headerlink" title="一座小城，无事可记 = ="></a>一座小城，无事可记 = =</h2><p>🐳🐳🐳</p>
+        <h4 id="JavaassistAnno-ob变量加上了注解A，需要改成B。"><a href="#JavaassistAnno-ob变量加上了注解A，需要改成B。" class="headerlink" title="JavaassistAnno ob变量加上了注解A，需要改成B。"></a>JavaassistAnno ob变量加上了注解A，需要改成B。</h4><a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> vm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> vm.anno.A;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaassistAnno</span> </span>&#123;</span><br><span class="line">    <span class="meta">@A</span></span><br><span class="line">    <span class="keyword">private</span> Object ob;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> A &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> B &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="直接修改field的属性就可以"><a href="#直接修改field的属性就可以" class="headerlink" title="直接修改field的属性就可以"></a>直接修改field的属性就可以</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ClassPool classPool = ClassPool.getDefault();</span><br><span class="line">CtClass ctClass = classPool.getCtClass(<span class="string">"vm.JavaassistAnno"</span>);</span><br><span class="line"><span class="keyword">for</span>(CtField ctField : ctClass.getDeclaredFields())&#123;</span><br><span class="line">    FieldInfo fieldInfo = ctField.getFieldInfo();</span><br><span class="line">    ConstPool cp = fieldInfo.getConstPool();</span><br><span class="line">    AnnotationsAttribute att = (AnnotationsAttribute) fieldInfo.getAttribute(AnnotationsAttribute.visibleTag);</span><br><span class="line">    AnnotationsAttribute attribute = <span class="keyword">new</span> AnnotationsAttribute(cp, AnnotationsAttribute.visibleTag);</span><br><span class="line">    <span class="keyword">for</span> (Annotation ann : att.getAnnotations())&#123;</span><br><span class="line">        <span class="keyword">if</span>(ann.getTypeName().equals(<span class="string">"vm.anno.A"</span>))&#123;</span><br><span class="line">            Annotation annotation = <span class="keyword">new</span> Annotation(<span class="string">"vm.anno.B"</span>, cp);</span><br><span class="line">            attribute.addAnnotation(annotation);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            attribute.addAnnotation(ann);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fieldInfo.addAttribute(attribute);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这个默认是调用了Thread.currentThread().getContextClassLoader()的defineClass方法，也有api可以指定classloader，或许取到了hibernate的classloader就可以输出过去。</span></span><br><span class="line">ctClass.toClass();</span><br><span class="line">Class clz = JavaassistAnno.class;</span><br><span class="line">Field field = clz.getDeclaredField(<span class="string">"ob"</span>);</span><br><span class="line"><span class="keyword">for</span> (java.lang.annotation.Annotation annotation : field.getAnnotations())&#123;</span><br><span class="line">    <span class="comment">//可以看到能成功输出@vm.anno.B</span></span><br><span class="line">    System.out.println(annotation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -389,7 +391,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常/" rel="tag"><i class="fa fa-tag"></i> 日常</a>
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
           
         </div>
       
@@ -402,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
-                <i class="fa fa-chevron-left"></i> OOM Killer
+              <a href="/2019/01/05/tips/" rel="next" title="一些Java小技巧">
+                <i class="fa fa-chevron-left"></i> 一些Java小技巧
               </a>
             
           </div>
@@ -411,6 +413,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/oom/" rel="prev" title="OOM Killer">
+                OOM Killer <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -590,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一座小城，无事可记"><span class="nav-number">1.</span> <span class="nav-text">一座小城，无事可记 = =</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaassistAnno-ob变量加上了注解A，需要改成B。"><span class="nav-number">1.</span> <span class="nav-text">JavaassistAnno ob变量加上了注解A，需要改成B。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接修改field的属性就可以"><span class="nav-number">2.</span> <span class="nav-text">直接修改field的属性就可以</span></a></li></ol></div>
             
 
           </div>

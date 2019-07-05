@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="日常," />
+  <meta name="keywords" content="encrypt," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一座小城，无事可记 = =🐳🐳🐳">
-<meta name="keywords" content="日常">
+<meta name="description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
+<meta name="keywords" content="encrypt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无锡">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/无锡/index.html">
+<meta property="og:title" content="RSA加密解密以及秘钥的生成">
+<meta property="og:url" content="http://yoursite.com/2016/01/14/rsa/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T14:46:47.224Z">
+<meta property="og:updated_time" content="2019-07-05T09:47:30.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无锡">
-<meta name="twitter:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta name="twitter:title" content="RSA加密解密以及秘钥的生成">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/无锡/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/01/14/rsa/"/>
 
 
 
 
 
-  <title>无锡 | Xia.Blog()</title>
+  <title>RSA加密解密以及秘钥的生成 | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/无锡/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/14/rsa/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">无锡</h1>
+          <h1 class="post-title" itemprop="name headline">RSA加密解密以及秘钥的生成</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:37:01+08:00">
-                2019-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-14T09:31:00+08:00">
+                2016-01-14
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/28/无锡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/无锡/" itemprop="commentCount"></span>
+                <a href="/2016/01/14/rsa/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/01/14/rsa/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,8 @@
       
 
       
-        <h2 id="一座小城，无事可记"><a href="#一座小城，无事可记" class="headerlink" title="一座小城，无事可记 = ="></a>一座小城，无事可记 = =</h2><p>🐳🐳🐳</p>
+        <a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPair;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPairGenerator;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        d();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">d</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//生成密钥对</span></span><br><span class="line">        KeyPairGenerator keyGen = KeyPairGenerator.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        keyGen.initialize(<span class="number">2048</span>);</span><br><span class="line">        KeyPair key = keyGen.generateKeyPair();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 公钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pub = key.getPublic().getEncoded();</span><br><span class="line">        <span class="comment">// 私钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pri = key.getPrivate().getEncoded();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 原文</span></span><br><span class="line">        <span class="keyword">byte</span>[] plainText = <span class="string">"你看看"</span>.getBytes();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//加密工具</span></span><br><span class="line">        Cipher c1 = Cipher.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        c1.init(Cipher.ENCRYPT_MODE, key.getPrivate());</span><br><span class="line">        <span class="keyword">byte</span>[] cipherText = c1.doFinal(plainText);</span><br><span class="line"> </span><br><span class="line">        c1.init(Cipher.DECRYPT_MODE, key.getPublic());</span><br><span class="line">        <span class="keyword">byte</span>[] output = c1.doFinal(cipherText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -389,7 +390,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常/" rel="tag"><i class="fa fa-tag"></i> 日常</a>
+            <a href="/tags/encrypt/" rel="tag"><i class="fa fa-tag"></i> encrypt</a>
           
         </div>
       
@@ -402,15 +403,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
-                <i class="fa fa-chevron-left"></i> OOM Killer
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/08/ThreadDump分析小结/" rel="prev" title="ThreadDump分析小结">
+                ThreadDump分析小结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -471,17 +472,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -580,22 +572,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一座小城，无事可记"><span class="nav-number">1.</span> <span class="nav-text">一座小城，无事可记 = =</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Xia.Blog()" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="GitHub的How to undo (almost) anything with Git这篇文章介绍了Git使用中的各种Undo技巧。">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git的undo技巧">
+<meta property="og:url" content="http://yoursite.com/2018/11/22/git/index.html">
+<meta property="og:site_name" content="Xia.Blog()">
+<meta property="og:description" content="GitHub的How to undo (almost) anything with Git这篇文章介绍了Git使用中的各种Undo技巧。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-05T08:41:00.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git的undo技巧">
+<meta name="twitter:description" content="GitHub的How to undo (almost) anything with Git这篇文章介绍了Git使用中的各种Undo技巧。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/22/git/"/>
+
+
+
+
+
+  <title>Git的undo技巧 | Xia.Blog()</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xia.Blog()</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay Hungry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-ravelry"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xia Xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia.Blog()">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git的undo技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-22T21:33:00+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/22/git/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/22/git/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>GitHub的<a href="https://github.com/blog/2019-how-to-undo-almost-anything-with-git" target="_blank" rel="noopener">How to undo (almost) anything with Git</a>这篇文章介绍了Git使用中的各种Undo技巧。<a id="more"></a></p>
+<p>任何版本控制系统中最有用的功能之一就是能够<strong>撤销（undo）</strong>你之前的错误。在Git中“undo”功能可能因为场景的不同而有些许的差异。</p>
+<p>当你进行一个新的提交时，Git会保存你在这个特定时间点的快照到本地的仓库中，之后，你可以通过Git来回到你早期的某个版本。</p>
+<p>我们来先看看一些需要你“撤销”的常见场景，你可以尝试使用Git来用最佳的方式来解决它。</p>
+<h2 id="撤销已经推送到远程的变更"><a href="#撤销已经推送到远程的变更" class="headerlink" title="撤销已经推送到远程的变更"></a>撤销已经推送到远程的变更</h2><h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><p>你已经执行git push,把你的修改推送到远程的仓库，现在你意识到之前推送的commit中有一个有些错误，想要撤销该commit。</p>
+<h4 id="方案："><a href="#方案：" class="headerlink" title="方案："></a>方案：</h4><p>git revert <sha></sha></p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>git revert 会创建一个新的commit，它和指定SHA对应的commit是相反的（或者说是反转的）。如果原型的commit是“物质”，那么新的commit就是“反物质”。</p>
+<p>任何从原来的commit里删除的内容都会再新的commit里被加回去，任何原来的commit中加入的内容都会在新的commit里被删除。</p>
+<p>这是Git中最安全、最基本的撤销场景，因为它并不会改变历史。所以你现在可以git push新的“反转”commit来抵消你错误提交的commit。</p>
+<h2 id="修正最后一个commit的消息"><a href="#修正最后一个commit的消息" class="headerlink" title="修正最后一个commit的消息"></a>修正最后一个commit的消息</h2><h4 id="场景：-1"><a href="#场景：-1" class="headerlink" title="场景："></a>场景：</h4><p>你在最后一条commit消息里有一个笔误，已经执行了 git commit -m ‘Fixes bug #42’ ,但是在git push之前你意识到这个消息应该是“Fix bug #43”。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>你可以使用下面的命令：</p>
+<p>git commit –amend<br>或</p>
+<p>git commit –amend -m ‘Fixes bug #43’<br>原理：<br>git commit –amend 会用一个新的commit更新并替换最近的commit，这个新的commit会把任何修改内容和上一个commit的内容结合起来。如果当前没有提出任何修改，这个操作就只会把上次的commit重写一遍。</p>
+<h2 id="撤销“本地的”修改"><a href="#撤销“本地的”修改" class="headerlink" title="撤销“本地的”修改"></a>撤销“本地的”修改</h2><h4 id="场景：-2"><a href="#场景：-2" class="headerlink" title="场景："></a>场景：</h4><p>一只喵从键盘上走过（在我们家就是儿子小手在键盘上划拉），无意中保存了修改，然后破坏了编辑器。不过，你还没有commit这些修改。你想要恢复被修改文件里的所有内容–就像上次commit的时候一模一样。</p>
+<h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4><p>git checkout – <bad filename=""><br>原理<br>git checkout会把工作目录中的文件修改到Git之前记录的某个状态。你可以提供你想返回的分支或者特定的SHA，或者在缺省情况下，GIt会认为你希望checkout的是HEAD，当前checkout分支的最后一次commit。</bad></p>
+<p>记住： 你用这种方法“撤销”的任何修改真的会完全消失。因为它们从来没有被提交过，所以之后Git也无法帮助我们恢复它们。你一定要确保自己了解在这个操作中丢掉的东西是什么？（也行可以利用git diff先确认一下）</p>
+<h2 id="重置“本地的”修改"><a href="#重置“本地的”修改" class="headerlink" title="重置“本地的”修改"></a>重置“本地的”修改</h2><p>场景：<br>你在本地提交了一下东西（还没有push），但是所有这些东西都很糟糕，你希望撤销前面的三次提交（就像它们从来没有发生过一样）。</p>
+<h4 id="方法：-1"><a href="#方法：-1" class="headerlink" title="方法："></a>方法：</h4><p>git reset <last good="" sha=""><br>或</last></p>
+<p>git reset –hard <last good="" sha=""></last></p>
+<h4 id="原理：-1"><a href="#原理：-1" class="headerlink" title="原理："></a>原理：</h4><p>git reset会把你的代码库历史返回到指定的SHA状态。这样就像是这些提交从来没有发生过。缺省情况下，git reset会保留工作目录。这样，提交是没有了，但是修改内容还在磁盘上。这是一种安全的选择，但通常我们会希望一步就“撤销”提交已经修改内容(这就是–hard选项的功能)。</p>
+<h2 id="在撤销“本地修改”之后再恢复"><a href="#在撤销“本地修改”之后再恢复" class="headerlink" title="在撤销“本地修改”之后再恢复"></a>在撤销“本地修改”之后再恢复</h2><h4 id="场景：-3"><a href="#场景：-3" class="headerlink" title="场景："></a>场景：</h4><p>你提交了几个commit，然后用git reset –hard撤销了这些修改（见上一段），接着你又意识到：你希望还原这些修改！</p>
+<h4 id="方法：-2"><a href="#方法：-2" class="headerlink" title="方法："></a>方法：</h4><p>git reflog<br>和</p>
+<p>git reset<br>或</p>
+<p>git checkout</p>
+<h4 id="原理：-2"><a href="#原理：-2" class="headerlink" title="原理："></a>原理：</h4><p>git reflog对于恢复项目历史是一个超棒的方式。你可以恢复几乎任何（commit过的）东西。</p>
+<p>你可以能熟悉git log命令，它会显示commit的列表。 git reflog也是类似的，不过它显示的是一个HEAD发生改变的时间列表。</p>
+<h2 id="一些注意事项："><a href="#一些注意事项：" class="headerlink" title="一些注意事项："></a>一些注意事项：</h2><p>它涉及的只是HEAD的改变。在你切换分支、用git commit进行提交、以及用git reset撤销commit时，HEAD会发生改变，但当你使用git checkout – <bad filename="">撤销时，HEAD并不会发生改变。就像我们在上面说的，这些修改从来没有被提交过，因此reflog也无法帮助我们恢复它们。<br>git reflog不会永远保持。Git会定期清理那些“用不到的”对象。不要指望几个月前的提交还一直躺着那里。<br>你的reflog就是你的，只是你的，你不能用git reflog来恢复另外一个开发者没有push过的commit。<br>git reflog</bad></p>
+<p>那么…你如何来利用reflog来“恢复”之前“撤销”的commit呢？它取决于你想做到的到底是什么。</p>
+<p>如果你希望准确的恢复项目的历史到某个时间点，用git reset –hard <sha><br>如果你希望重建工作目录里的一个或多个文件，让它们恢复到某个时间点的状态，用git checkout <sha> – <filename><br>如果你希望把这些commit里的某个重新提交到你的代码库里，用git cherry-pick <sha><br>利用分支的另一种做法</sha></filename></sha></sha></p>
+<h4 id="场景：-4"><a href="#场景：-4" class="headerlink" title="场景："></a>场景：</h4><p>你进行了一些提交，然后意识到你开始checkout的是master分支。希望这些提交进入到另外一个特性（feature）分支。</p>
+<h4 id="方法：-3"><a href="#方法：-3" class="headerlink" title="方法："></a>方法：</h4><p>git branch feature<br>git reset –hard origin/master<br>git checkout feature</p>
+<h4 id="原理：-3"><a href="#原理：-3" class="headerlink" title="原理："></a>原理：</h4><p>你可能习惯用 git checkout -b <name>创建一个新的分支（这是创建新分支并马上checkout的流行捷径），但是你不希望马上切换分支。这里，git branch feature创建了一个叫做feature的新分支，并指向你最近的commit，但是还是让你checkout在master分支上。</name></p>
+<p>下一步，在提交任何新的commit之前，用git reset –hard 把master分支倒回origin/master。不过别担心，那些commit还在feature分支里。</p>
+<p>最后，用git checkout切换到新的feature分支，并让你最近所有的工作成果都完好无损。</p>
+<p>及时分支，省去繁琐</p>
+<h4 id="场景：-5"><a href="#场景：-5" class="headerlink" title="场景："></a>场景：</h4><p>你在master分支的基础上创建一个feature分支，但是master分支已经滞后于origin/master很多。现在master分支已经和origin/master同步，你希望在feature上的提交从现在开始，而不是从滞后很多的地方开始。</p>
+<h4 id="方法：-4"><a href="#方法：-4" class="headerlink" title="方法："></a>方法：</h4><p>git checkout feature<br>和</p>
+<p>git rebase master</p>
+<h4 id="原理：-4"><a href="#原理：-4" class="headerlink" title="原理："></a>原理：</h4><p>要达到这个效果，你本来可以通过git reset（不加–hard，这样可以再磁盘上保留修改）和git checkout -b <new branch="" name="">然后再重新提交修改，不过这样做的话，你就失去提交历史。我们有更好的办法。</new></p>
+<p>git rebase master会做下面的这些事情：</p>
+<p>首先它会找到你当前checkout的分支和master分支的共同祖先。<br>然后它reset当前checkout的分支到那个共同祖先 ，在一个临时保存区存放所有之前的提交。<br>然后它把当前checkout的分支提到master的末尾部分，并从临时保存区重新把存放的commit提交到master分支的最后 一个commit之后。<br>大量的撤销/恢复<br>场景：<br>你向某个方向开始实现一个特性，但是你半路意识到另一个方案更好。你已经进行了十几次的提交，但是你现在只需要其中的一部分。你希望其他不需要的提交统统消失。</p>
+<h4 id="方案：-1"><a href="#方案：-1" class="headerlink" title="方案："></a>方案：</h4><p>git rebase -i <carlier sha=""><br>原理：<br>-i 参数会让rebase进入“交互模式”。它开始类似于签名讨论的rebase，但在重新进行任何提交之前，它会暂停下来并允许你详细的修改每一个提交。</carlier></p>
+<p>rebase -i 会打开你缺省的文本编辑器，里面列出候选的提交。</p>
+<p>rebase -i</p>
+<p>前面两列是键： 第一个是选定的命令，对应第二列里的SHA确定的commit。缺省情况下，rebase -i假定每个commit都要通过pick命令被运行。</p>
+<p>要丢弃一个commit，只要在编辑器中删除那一行就行了。如果你不再需要项目里面的那几个错误的提交， 删除你想删除的几行。</p>
+<p>如果你需要暴漏commit的内容，而是对commit消息进行编辑，你可以使用reword命令，将第一列的pick替换成reword（或者直接使用r）。有人会觉得再这里直接重写commit消息就行了，但是这样是不管用的（rebase -i会忽略SHA列前面的任何东西，它后面的文本只是用来帮助我们记住那一串SHA代表什么）。当你完成rebase -i的操作之后，你会被提示输入需要编写的任何commit消息。</p>
+<p>如果你需要把两个commit合并在一起，你可以使用squash或者fixup命令。</p>
+<p>rebase -i</p>
+<p>squash和fixup会“向上”合并（带有这两个命令的commit会被合并到他的签一个commit里）。上面的这个例子里，0835fe2和6943e85会合并成一个commit，38f5c4c和af67f82会被合并成另一个。</p>
+<p>如果你选择了squash，Git会提示我们给新合并的commit一个新的commit消息； fixup则会把合并清单里的第一个commit的消息直接给新合并的commit。</p>
+<p>在你保存并推出编辑器的时候，Git会按从顶部到底部的顺序运用你的commit。你可以通过在保存前修改commit顺序来改变运用的顺序。如果你愿意，你也可以同如下安排把af67f82和0835fe2合并到一起。</p>
+<p>rebase -i</p>
+<h2 id="修复更早期的commit"><a href="#修复更早期的commit" class="headerlink" title="修复更早期的commit"></a>修复更早期的commit</h2><p>场景：<br>你在一个更早期的commit里忘记了加入一个文件，如果更早的commit能包含这个忘记的文件就太棒了。你还没有push，但这个commit不是最近的，所以你还没法用commit –amend</p>
+<h4 id="方法：-5"><a href="#方法：-5" class="headerlink" title="方法："></a>方法：</h4><p>git commit –squash <sha of="" the="" earlier="" commit=""><br>和</sha></p>
+<p>git rebase –autosquash -i <even earlier="" sha=""></even></p>
+<h4 id="原理：-5"><a href="#原理：-5" class="headerlink" title="原理："></a>原理：</h4><p>git commit –squash会创建一个新的commit，它带有一个commit消息，类似于squash! Earlier commit。(你也可以手工创建一个带有类似commit消息的commit，但是 commit –squash 可以帮你省下输入的工作)</p>
+<p>如果你不想被提示为新合并的commit输入一条新的commit消息，你也可以利用 git commit –fixup。在这个情况下，你很有可能会用commit –fixup，因为你只是希望在rebase的适合，使用早期commit的commit消息。</p>
+<p>rebase –autosquash -i 会激活一个交互式的rebase编辑器，但是编辑器打开的适合，在commit清单里任何squash!和fixup！的commit都已经配对到目标commit上了。</p>
+<p>rebase –autosquash -i</p>
+<p>在使用 –squash 和 –fixup的适合，你可能不记得想要修正的commit的SHA了（只是记得它是前面的第1个或者第5个commit）。你会发现Git的^和~操作符特别好用。HEAD~是HEAD的前一个commit。HEAD~4是HEAD往前第4个（或者一起算，倒数第5个commit）。</p>
+<h2 id="停止追踪一个文件"><a href="#停止追踪一个文件" class="headerlink" title="停止追踪一个文件"></a>停止追踪一个文件</h2><h4 id="场景：-6"><a href="#场景：-6" class="headerlink" title="场景："></a>场景：</h4><p>你偶然把application.log加到代码库里了，现在每次你运行应用，Git都会报告在application.log里有未提交的修改。你把 *.log放到了.gitignore文件里，可文件还是在代码库里，你怎样才能让Git“撤销”对这个文件的追踪呢？</p>
+<h4 id="方法：-6"><a href="#方法：-6" class="headerlink" title="方法："></a>方法：</h4><p>git rm –cached application.log<br>原理:<br>虽然.gitignore会阻止Git追踪文件的修改，甚至不关注文件是否存在，但这只是针对那些以前从来没有追踪过的文件。一旦有个文件被加入并提交了，Git就会持续关注改文件的改变。类似地，如果你利用git add -f来强制或覆盖了.gitignore，Git还会持续追踪改变的情况。之后你就不必用-f来添加这个文件了。</p>
+<p>如果你希望从Git的追踪对象中删除那个本应忽略的文件，git rm –cached会从追踪对象中删除它，但让文件在磁盘上保持原封不动。因为现在它已经被忽略了，你在git status里就不会再看见这个文件，也不回再偶然提交该文件的修改了。</p>
+<p>这就是如何在Git里撤销任何操作的方法。要了解更多关于本文中用到的Git命令，请查看官方文档。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/08/JAVA-classloader/" rel="next" title="JAVA ClassLoader">
+                <i class="fa fa-chevron-left"></i> JAVA ClassLoader
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/22/JAVA-GC/" rel="prev" title="JVMTI 强制GC">
+                JVMTI 强制GC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b93832db7370ddf" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Xia Xiang" />
+            
+              <p class="site-author-name" itemprop="name">Xia Xiang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaxianggo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaxianggo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/2716276777" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/f4febc9aea94" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销已经推送到远程的变更"><span class="nav-number">1.</span> <span class="nav-text">撤销已经推送到远程的变更</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景："><span class="nav-number">1.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案："><span class="nav-number">1.0.2.</span> <span class="nav-text">方案：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理："><span class="nav-number">1.0.3.</span> <span class="nav-text">原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修正最后一个commit的消息"><span class="nav-number">2.</span> <span class="nav-text">修正最后一个commit的消息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">2.0.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销“本地的”修改"><span class="nav-number">3.</span> <span class="nav-text">撤销“本地的”修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法："><span class="nav-number">3.0.2.</span> <span class="nav-text">方法：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重置“本地的”修改"><span class="nav-number">4.</span> <span class="nav-text">重置“本地的”修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-1"><span class="nav-number">4.0.1.</span> <span class="nav-text">方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-1"><span class="nav-number">4.0.2.</span> <span class="nav-text">原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在撤销“本地修改”之后再恢复"><span class="nav-number">5.</span> <span class="nav-text">在撤销“本地修改”之后再恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-3"><span class="nav-number">5.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-2"><span class="nav-number">5.0.2.</span> <span class="nav-text">方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-2"><span class="nav-number">5.0.3.</span> <span class="nav-text">原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些注意事项："><span class="nav-number">6.</span> <span class="nav-text">一些注意事项：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-4"><span class="nav-number">6.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-3"><span class="nav-number">6.0.2.</span> <span class="nav-text">方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-3"><span class="nav-number">6.0.3.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-5"><span class="nav-number">6.0.4.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-4"><span class="nav-number">6.0.5.</span> <span class="nav-text">方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-4"><span class="nav-number">6.0.6.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案：-1"><span class="nav-number">6.0.7.</span> <span class="nav-text">方案：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复更早期的commit"><span class="nav-number">7.</span> <span class="nav-text">修复更早期的commit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-5"><span class="nav-number">7.0.1.</span> <span class="nav-text">方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原理：-5"><span class="nav-number">7.0.2.</span> <span class="nav-text">原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#停止追踪一个文件"><span class="nav-number">8.</span> <span class="nav-text">停止追踪一个文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景：-6"><span class="nav-number">8.0.1.</span> <span class="nav-text">场景：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法：-6"><span class="nav-number">8.0.2.</span> <span class="nav-text">方法：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xia Xiang</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IeIed3aY4zu0iYnoQsuF5B7V-9Nh9j0Va',
+        appKey: '2KEDeY3uGavLCVjsCkb6yqKx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":0.7,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":80,"height":160,"position":"right","hOffset":0,"vOffset":-60},"mobile":{"show":true,"scale":0.2,"width":50,"height":100},"react":{"opacityDefault":0.7,"opacityOnHover":0.1},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

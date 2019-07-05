@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JVM," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Xia.Blog()" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVMTI 强制GC">
+<meta property="og:url" content="http://yoursite.com/2018/11/22/JAVA-GC/index.html">
+<meta property="og:site_name" content="Xia.Blog()">
+<meta property="og:description" content="JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/11/22/JAVA-GC/a.png">
+<meta property="og:updated_time" content="2019-07-05T09:49:15.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVMTI 强制GC">
+<meta name="twitter:description" content="JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/22/JAVA-GC/a.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/22/JAVA-GC/"/>
+
+
+
+
+
+  <title>JVMTI 强制GC | Xia.Blog()</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xia.Blog()</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay Hungry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-ravelry"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/JAVA-GC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xia Xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia.Blog()">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JVMTI 强制GC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-22T21:33:00+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/22/JAVA-GC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/22/JAVA-GC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JVM-TI-JVM-Tool-Interface-是用来开发和监测jvm的编程接口。"><a href="#JVM-TI-JVM-Tool-Interface-是用来开发和监测jvm的编程接口。" class="headerlink" title="JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。"></a>JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。<a id="more"></a></h2><p>开发文档:<a href="https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html</a></p>
+<p>参考资料：<a href="https://stackoverflow.com/questions/2178296/java-how-do-you-really-force-a-gc-using-jvmtis-forcegargabecollection" target="_blank" rel="noopener">https://stackoverflow.com/questions/2178296/java-how-do-you-really-force-a-gc-using-jvmtis-forcegargabecollection</a></p>
+<p><a href="https://blog.csdn.net/yczz/article/details/39034223" target="_blank" rel="noopener">https://blog.csdn.net/yczz/article/details/39034223</a></p>
+<p><a href="https://blog.csdn.net/ddelphine/article/details/79695947" target="_blank" rel="noopener">https://blog.csdn.net/ddelphine/article/details/79695947</a></p>
+<h3 id="JVM-TI-提供了许多JVM相关的接口，强制GC的接口是："><a href="#JVM-TI-提供了许多JVM相关的接口，强制GC的接口是：" class="headerlink" title="JVM TI 提供了许多JVM相关的接口，强制GC的接口是："></a>JVM TI 提供了许多JVM相关的接口，强制GC的接口是：</h3><p>jvmtiError ForceGarbageCollection(jvmtiEnv* env)<br>可以在被监测的测试类中定义原生的native方法，然后用C/C++调用JVM TI提供的接口来实现native方法，最后编译成动态链接库.dll（linux系统为 shared object 文件，.so）</p>
+<h4 id="编写简单的agent"><a href="#编写简单的agent" class="headerlink" title="编写简单的agent"></a>编写简单的agent</h4><p>源码引用头文件#include&lt;jvmti.h&gt;,该头文件在jdk安装目录的include目录下。#include&lt;jni_md.h&gt;，windows系统中该头文件在jdk安装目录include\win32下，linux系统则在相应的include/linux目录下。在编译生成.dll/.so文件时要添加这两个头文件的搜索路径。</p>
+<p>ForceGC.c -fPIC -shared -o forceGC.so<br>具体编译情况依据系统，语言和编译器</p>
+<p>linux环境下 ForceGC.c<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jvmti.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni_md.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ForceGC.h"</span></span></span><br><span class="line"><span class="comment">/**&lt; 此处定义结构体GobalAgentData用于保存jvmtiEnv指针 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    jvmtiEnv * jvmti;</span><br><span class="line">&#125;GlobalAgentData;</span><br><span class="line"><span class="keyword">static</span> GlobalAgentData * gdata;</span><br><span class="line"><span class="function">JNIEXPORT jint JNICALL <span class="title">Agent_OnLoad</span><span class="params">(JavaVM *jvm, <span class="keyword">char</span> * options, <span class="keyword">void</span> *reserved)</span></span>&#123;</span><br><span class="line">    jvmtiEnv * jvmti = <span class="literal">NULL</span>;</span><br><span class="line">    jvmtiCapabilities capa;</span><br><span class="line">    jvmtiError error;</span><br><span class="line">    jint result = (*jvm)-&gt;GetEnv(jvm,(<span class="keyword">void</span>**)&amp;jvmti, JVMTI_VERSION_1_2);</span><br><span class="line">    <span class="keyword">if</span>(result != JNI_OK)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR : Unable to access JVMTI! \n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"GC_Agent was loaded success.\n"</span>);</span><br><span class="line">    (<span class="keyword">void</span>)<span class="built_in">memset</span>(&amp;capa,<span class="number">0</span>,<span class="keyword">sizeof</span>(jvmtiCapabilities));</span><br><span class="line">   </span><br><span class="line">    capa.can_tag_objects = <span class="number">1</span>;</span><br><span class="line">    error = (*jvmti)-&gt;AddCapabilities(jvmti,&amp;capa);</span><br><span class="line">   <span class="comment">//将jvmti保存到全局变量</span></span><br><span class="line">    gdata = (GlobalAgentData*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(GlobalAgentData));</span><br><span class="line">    gdata-&gt;jvmti = jvmti;</span><br><span class="line">    <span class="keyword">return</span> JNI_OK;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_Test_forceGC</span><span class="params">(JNIEnv* env, jclass thisClass)</span></span>&#123;</span><br><span class="line">        jvmtiError error = (*(gdata-&gt;jvmti))-&gt;ForceGarbageCollection(gdata-&gt;jvmti);</span><br><span class="line">        <span class="keyword">if</span> (error == <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\nJVM has been forced to GC.\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">ForceGC.h</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _Included_FinalizeEscapeGC</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _Included_FinalizeEscapeGC</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_Test_forceGC</span><br><span class="line">  (JNIEnv *, jclass);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">Test.java测试用类</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Test SAVE_HOOK = null;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isAlive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"I am still alive"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override </span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> throws Throwable </span>&#123;</span><br><span class="line">		super.finalize();</span><br><span class="line">		System.out.println(<span class="string">"finalize method was excuted."</span>);</span><br><span class="line">		Test.SAVE_HOOK = <span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> native <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">forceGC</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws Throwable </span>&#123;</span><br><span class="line">		SAVE_HOOK = <span class="keyword">new</span> Test();</span><br><span class="line">		SAVE_HOOK = null;</span><br><span class="line">		</span><br><span class="line">		forceGC();</span><br><span class="line">		</span><br><span class="line">		Thread.sleep(<span class="number">500</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(SAVE_HOOK != null) &#123;</span><br><span class="line">			SAVE_HOOK.isAlive();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"Oh... I am dead."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		SAVE_HOOK = null;</span><br><span class="line">		</span><br><span class="line">		System.gc();</span><br><span class="line">		</span><br><span class="line">		Thread.sleep(<span class="number">500</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(SAVE_HOOK != null) &#123;</span><br><span class="line">			SAVE_HOOK.isAlive();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"Oh... I am dead."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后启动agent<br>java -agentpath:./forceGC.so  Test</p>
+<p>结果如下：<br><img src="a.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/22/git/" rel="next" title="Git的undo技巧">
+                <i class="fa fa-chevron-left"></i> Git的undo技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/tips/" rel="prev" title="一些Java小技巧">
+                一些Java小技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b93832db7370ddf" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Xia Xiang" />
+            
+              <p class="site-author-name" itemprop="name">Xia Xiang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaxianggo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaxianggo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.weibo.com/2716276777" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/f4febc9aea94" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-TI-JVM-Tool-Interface-是用来开发和监测jvm的编程接口。"><span class="nav-number">1.</span> <span class="nav-text">JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-TI-提供了许多JVM相关的接口，强制GC的接口是："><span class="nav-number">1.1.</span> <span class="nav-text">JVM TI 提供了许多JVM相关的接口，强制GC的接口是：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编写简单的agent"><span class="nav-number">1.1.1.</span> <span class="nav-text">编写简单的agent</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xia Xiang</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IeIed3aY4zu0iYnoQsuF5B7V-9Nh9j0Va',
+        appKey: '2KEDeY3uGavLCVjsCkb6yqKx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":0.7,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":80,"height":160,"position":"right","hOffset":0,"vOffset":-60},"mobile":{"show":true,"scale":0.2,"width":50,"height":100},"react":{"opacityDefault":0.7,"opacityOnHover":0.1},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

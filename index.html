@@ -420,7 +420,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/Java IO/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/oom/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -439,7 +439,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/11/Java IO/" itemprop="url">JAVA IO</a></h1>
+                <a class="post-title-link" href="/2019/03/01/oom/" itemprop="url">OOM Killer</a></h1>
         
 
         <div class="post-meta">
@@ -451,8 +451,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-11T23:55:00+08:00">
-                2019-04-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-01T23:55:00+08:00">
+                2019-03-01
               </time>
             
 
@@ -492,8 +492,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/04/11/Java IO/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/11/Java IO/" itemprop="commentCount"></span>
+                <a href="/2019/03/01/oom/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/01/oom/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -522,10 +522,10 @@
 
       
         
-          <h1 id="一、概览"><a href="#一、概览" class="headerlink" title="一、概览"></a>一、概览</h1><p>Java 的 I/O 大概可以分成以下几类：<br>
+          <h2 id="Out-of-memory"><a href="#Out-of-memory" class="headerlink" title="Out of memory"></a>Out of memory</h2><h4 id="OOM-Killer原理"><a href="#OOM-Killer原理" class="headerlink" title="OOM Killer原理"></a>OOM Killer原理
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/11/Java IO/#more" rel="contents">
+            <a class="btn" href="/2019/03/01/oom/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -576,7 +576,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/缓存/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/11/javaassist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -595,7 +595,319 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/22/缓存/" itemprop="url">缓存相关</a></h1>
+                <a class="post-title-link" href="/2019/02/11/javaassist/" itemprop="url">javaassist动态修改注解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-11T23:55:00+08:00">
+                2019-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/11/javaassist/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/11/javaassist/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="JavaassistAnno-ob变量加上了注解A，需要改成B。"><a href="#JavaassistAnno-ob变量加上了注解A，需要改成B。" class="headerlink" title="JavaassistAnno ob变量加上了注解A，需要改成B。"></a>JavaassistAnno ob变量加上了注解A，需要改成B。</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/11/javaassist/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xia Xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia.Blog()">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/05/tips/" itemprop="url">一些Java小技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-05T11:21:00+08:00">
+                2019-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/05/tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/05/tips/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="交换判断条件提高性能"><a href="#交换判断条件提高性能" class="headerlink" title="交换判断条件提高性能"></a>交换判断条件提高性能</h2><h3 id="在下面的例子中"><a href="#在下面的例子中" class="headerlink" title="在下面的例子中"></a>在下面的例子中</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Utils.string2Number((String) value) != <span class="keyword">null</span> || style.getFormat() <span class="keyword">instanceof</span> NumberFormat) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (style.getFormat() <span class="keyword">instanceof</span> NumberFormat || Utils.string2Number((String) value) != <span class="keyword">null</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/05/tips/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/JAVA-GC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xia Xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia.Blog()">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/22/JAVA-GC/" itemprop="url">JVMTI 强制GC</a></h1>
         
 
         <div class="post-meta">
@@ -648,8 +960,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/22/缓存/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/22/缓存/" itemprop="commentCount"></span>
+                <a href="/2018/11/22/JAVA-GC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/22/JAVA-GC/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -678,11 +990,166 @@
 
       
         
-          <h1 id="关于缓存"><a href="#关于缓存" class="headerlink" title="关于缓存"></a>关于缓存</h1><h1 id="一、缓存特征"><a href="#一、缓存特征" class="headerlink" title="一、缓存特征"></a>一、缓存特征</h1><h2 id="命中率"><a href="#命中率" class="headerlink" title="命中率"></a>命中率</h2><p>当某个请求能够通过访问缓存而得到响应时，称为缓存命中。</p>
-<p>缓存命中率越高，缓存的利用率也就越高。<br>
+          <h2 id="JVM-TI-JVM-Tool-Interface-是用来开发和监测jvm的编程接口。"><a href="#JVM-TI-JVM-Tool-Interface-是用来开发和监测jvm的编程接口。" class="headerlink" title="JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。"></a>JVM TI (JVM Tool Interface) 是用来开发和监测jvm的编程接口。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/22/缓存/#more" rel="contents">
+            <a class="btn" href="/2018/11/22/JAVA-GC/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xia Xiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xia.Blog()">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/22/git/" itemprop="url">Git的undo技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-22T21:33:00+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/22/git/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/22/git/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>GitHub的<a href="https://github.com/blog/2019-how-to-undo-almost-anything-with-git" target="_blank" rel="noopener">How to undo (almost) anything with Git</a>这篇文章介绍了Git使用中的各种Undo技巧。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/22/git/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -835,7 +1302,7 @@
 
       
         
-          <h2 id="类加载器的基本概念"><a href="#类加载器的基本概念" class="headerlink" title="类加载器的基本概念"></a>类加载器的基本概念</h2><p>顾名思义，类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。类加载器负责读取 Java 字节代码，并转换成 java.lang.Class类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 newInstance()方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。基本上所有的类加载器都是 java.lang.ClassLoader类的一个实例。<br>
+          <p>本文从虚拟机底层机制说起，然后分析ClassLoader代码结构与特性，最后说明ClassLoader在9.0插件引擎中的应用。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/08/JAVA-classloader/#more" rel="contents">
@@ -889,7 +1356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/计算机网络 - 传输层/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/cache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -908,7 +1375,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/12/计算机网络 - 传输层/" itemprop="url">计算机网络</a></h1>
+                <a class="post-title-link" href="/2018/05/19/cache/" itemprop="url">关于缓存策略</a></h1>
         
 
         <div class="post-meta">
@@ -920,8 +1387,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T11:21:00+08:00">
-                2018-06-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-19T09:31:00+08:00">
+                2018-05-19
               </time>
             
 
@@ -961,8 +1428,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/12/计算机网络 - 传输层/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/12/计算机网络 - 传输层/" itemprop="commentCount"></span>
+                <a href="/2018/05/19/cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/19/cache/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -991,10 +1458,11 @@
 
       
         
-          <p>网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节，使应用程序看起来像<br>
+          <h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存主要用于解决高并发，大数据场景下，热点数据访问的性能问题。提供高性能的数据快速访问。</p>
+<p>缓存的过期策略主要有FIFO、LFU、LRU三种。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/12/计算机网络 - 传输层/#more" rel="contents">
+            <a class="btn" href="/2018/05/19/cache/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1045,7 +1513,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/12/Java 容器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/08/ThreadDump分析小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -1064,319 +1532,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/12/Java 容器/" itemprop="url">JAVA 容器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-12T15:23:00+08:00">
-                2016-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/12/12/Java 容器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/12/12/Java 容器/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、概览"><a href="#一、概览" class="headerlink" title="一、概览"></a>一、概览</h1><p>容器主要包括 Collection 和 Map 两种，Collection 存储着对象的集合，而 Map 存储着键值对（两个对象）的映射表。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/12/12/Java 容器/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/22/JAVA-GC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xia Xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xia.Blog()">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/22/JAVA-GC/" itemprop="url">JAVA GC</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-22T21:33:00+08:00">
-                2016-11-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/11/22/JAVA-GC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/11/22/JAVA-GC/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Understanding-Java-Garbage-Collection"><a href="#Understanding-Java-Garbage-Collection" class="headerlink" title="Understanding Java Garbage Collection"></a>Understanding Java Garbage Collection</h2><p>What are the benefits of knowing how garbage collection (GC) works in Java? Satisfying the intellectual curiosity as a software engineer would be a valid cause, but also, understanding how GC works can help you write much better Java applications.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/22/JAVA-GC/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/08/设计模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xia Xiang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xia.Blog()">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/08/设计模式/" itemprop="url">设计模式</a></h1>
+                <a class="post-title-link" href="/2016/09/08/ThreadDump分析小结/" itemprop="url">ThreadDump分析小结</a></h1>
         
 
         <div class="post-meta">
@@ -1429,8 +1585,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/09/08/设计模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/09/08/设计模式/" itemprop="commentCount"></span>
+                <a href="/2016/09/08/ThreadDump分析小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/09/08/ThreadDump分析小结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1459,12 +1615,10 @@
 
       
         
-          <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><pre><code>设计模式是开发过程，常用的一些理论方法。比如单例模式、工厂模式等。旨在快速构造出，可复用，便维护，有助于团队协作的高质量代码。
-设计模式是一套代码设计「经验的总结」。项目中「合理的」运用设计模式可以「巧妙的解决很多问题」。   
-</code></pre>
+          <p>ThreadDump中包含了线程的状态信息，一般有 Runnable，BLOCKED，Wait几种状态。Wait一般都是线程池里面的线程，可以跳过，主要关注点应该放在Runnable和BLOCKED这两种状态。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/09/08/设计模式/#more" rel="contents">
+            <a class="btn" href="/2016/09/08/ThreadDump分析小结/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1515,7 +1669,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/14/集群/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/14/rsa/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -1534,7 +1688,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/01/14/集群/" itemprop="url">集群相关</a></h1>
+                <a class="post-title-link" href="/2016/01/14/rsa/" itemprop="url">RSA加密解密以及秘钥的生成</a></h1>
         
 
         <div class="post-meta">
@@ -1587,8 +1741,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/01/14/集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/01/14/集群/" itemprop="commentCount"></span>
+                <a href="/2016/01/14/rsa/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/01/14/rsa/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1617,15 +1771,11 @@
 
       
         
-          <h1 id="一、负载均衡"><a href="#一、负载均衡" class="headerlink" title="一、负载均衡"></a>一、负载均衡</h1><p>集群中的应用服务器（节点）通常被设计成无状态，用户可以请求任何一个节点。</p>
-<p>负载均衡器会根据集群中每个节点的负载情况，将用户请求转发到合适的节点上。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/01/14/集群/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPair;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPairGenerator;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        d();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">d</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//生成密钥对</span></span><br><span class="line">        KeyPairGenerator keyGen = KeyPairGenerator.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        keyGen.initialize(<span class="number">2048</span>);</span><br><span class="line">        KeyPair key = keyGen.generateKeyPair();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 公钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pub = key.getPublic().getEncoded();</span><br><span class="line">        <span class="comment">// 私钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pri = key.getPrivate().getEncoded();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 原文</span></span><br><span class="line">        <span class="keyword">byte</span>[] plainText = <span class="string">"你看看"</span>.getBytes();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//加密工具</span></span><br><span class="line">        Cipher c1 = Cipher.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        c1.init(Cipher.ENCRYPT_MODE, key.getPrivate());</span><br><span class="line">        <span class="keyword">byte</span>[] cipherText = c1.doFinal(plainText);</span><br><span class="line"> </span><br><span class="line">        c1.init(Cipher.DECRYPT_MODE, key.getPublic());</span><br><span class="line">        <span class="keyword">byte</span>[] output = c1.doFinal(cipherText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1709,7 +1859,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1731,7 +1881,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

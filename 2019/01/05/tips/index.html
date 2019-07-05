@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="日常," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一座小城，无事可记 = =🐳🐳🐳">
-<meta name="keywords" content="日常">
+<meta name="description" content="交换判断条件提高性能在下面的例子中1234if (Utils.string2Number((String) value) != null || style.getFormat() instanceof NumberFormat) &amp;#123;&amp;#125;if (style.getFormat() instanceof NumberFormat || Utils.string2Number((Str">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无锡">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/无锡/index.html">
+<meta property="og:title" content="一些Java小技巧">
+<meta property="og:url" content="http://yoursite.com/2019/01/05/tips/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta property="og:description" content="交换判断条件提高性能在下面的例子中1234if (Utils.string2Number((String) value) != null || style.getFormat() instanceof NumberFormat) &amp;#123;&amp;#125;if (style.getFormat() instanceof NumberFormat || Utils.string2Number((Str">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T14:46:47.224Z">
+<meta property="og:updated_time" content="2019-07-05T09:59:31.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无锡">
-<meta name="twitter:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta name="twitter:title" content="一些Java小技巧">
+<meta name="twitter:description" content="交换判断条件提高性能在下面的例子中1234if (Utils.string2Number((String) value) != null || style.getFormat() instanceof NumberFormat) &amp;#123;&amp;#125;if (style.getFormat() instanceof NumberFormat || Utils.string2Number((Str">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/无锡/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/05/tips/"/>
 
 
 
 
 
-  <title>无锡 | Xia.Blog()</title>
+  <title>一些Java小技巧 | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/无锡/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">无锡</h1>
+          <h1 class="post-title" itemprop="name headline">一些Java小技巧</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:37:01+08:00">
-                2019-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-05T11:21:00+08:00">
+                2019-01-05
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/28/无锡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/无锡/" itemprop="commentCount"></span>
+                <a href="/2019/01/05/tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/05/tips/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,16 @@
       
 
       
-        <h2 id="一座小城，无事可记"><a href="#一座小城，无事可记" class="headerlink" title="一座小城，无事可记 = ="></a>一座小城，无事可记 = =</h2><p>🐳🐳🐳</p>
+        <h2 id="交换判断条件提高性能"><a href="#交换判断条件提高性能" class="headerlink" title="交换判断条件提高性能"></a>交换判断条件提高性能</h2><h3 id="在下面的例子中"><a href="#在下面的例子中" class="headerlink" title="在下面的例子中"></a>在下面的例子中</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Utils.string2Number((String) value) != <span class="keyword">null</span> || style.getFormat() <span class="keyword">instanceof</span> NumberFormat) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (style.getFormat() <span class="keyword">instanceof</span> NumberFormat || Utils.string2Number((String) value) != <span class="keyword">null</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>上下两个代码，第一个的判断先转数值类型 第二个则先判断format类型</p>
+<p>第一段代码不管什么类型都会做一次类型的转换，这样的效率是很低的，而判断类型则要快很多</p>
+<p>所以写if条件的时候要遵循的原则是判断简单的条件写在前面<br>不过说一点，最好的方法还是封装好多态，而不是用instanceof判断类型来执行方法</p>
+<h2 id="关于简单对象"><a href="#关于简单对象" class="headerlink" title="关于简单对象"></a>关于简单对象</h2><p>在jdk8以下构造大量简单对象效率也是极差，jdk8速度很快差不多差上千倍，所以能使用基本类型尽量使用基本类型，而不是用一个简单的对象对基本类型进行封装</p>
+<h2 id="大量轻量级计算时不要直接提交到线程池"><a href="#大量轻量级计算时不要直接提交到线程池" class="headerlink" title="大量轻量级计算时不要直接提交到线程池"></a>大量轻量级计算时不要直接提交到线程池</h2><p>比如有80w个计算，每个耗时都很短，排队的时候会浪费大量的等待时间，不如直接分成几组，比如分成8组，每个线程执行10w个计算，以后可以通过其他方式来均衡每个线程的负载</p>
+<p>##有用的网站</p>
+<p><a href="https://gceasy.io/" target="_blank" rel="noopener">分析GC日志</a></p>
+<p><a href="https://fastthread.io" target="_blank" rel="noopener">分析ThreadDump</a></p>
 
       
     </div>
@@ -389,7 +398,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常/" rel="tag"><i class="fa fa-tag"></i> 日常</a>
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
           
         </div>
       
@@ -402,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
-                <i class="fa fa-chevron-left"></i> OOM Killer
+              <a href="/2018/11/22/JAVA-GC/" rel="next" title="JVMTI 强制GC">
+                <i class="fa fa-chevron-left"></i> JVMTI 强制GC
               </a>
             
           </div>
@@ -411,6 +420,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/11/javaassist/" rel="prev" title="javaassist动态修改注解">
+                javaassist动态修改注解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -590,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一座小城，无事可记"><span class="nav-number">1.</span> <span class="nav-text">一座小城，无事可记 = =</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#交换判断条件提高性能"><span class="nav-number">1.</span> <span class="nav-text">交换判断条件提高性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在下面的例子中"><span class="nav-number">1.1.</span> <span class="nav-text">在下面的例子中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于简单对象"><span class="nav-number">2.</span> <span class="nav-text">关于简单对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大量轻量级计算时不要直接提交到线程池"><span class="nav-number">3.</span> <span class="nav-text">大量轻量级计算时不要直接提交到线程池</span></a></li></ol></div>
             
 
           </div>

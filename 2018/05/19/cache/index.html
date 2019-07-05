@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="日常," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="一座小城，无事可记 = =🐳🐳🐳">
-<meta name="keywords" content="日常">
+<meta name="description" content="缓存缓存主要用于解决高并发，大数据场景下，热点数据访问的性能问题。提供高性能的数据快速访问。 缓存的过期策略主要有FIFO、LFU、LRU三种。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="无锡">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/无锡/index.html">
+<meta property="og:title" content="关于缓存策略">
+<meta property="og:url" content="http://yoursite.com/2018/05/19/cache/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta property="og:description" content="缓存缓存主要用于解决高并发，大数据场景下，热点数据访问的性能问题。提供高性能的数据快速访问。 缓存的过期策略主要有FIFO、LFU、LRU三种。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T14:46:47.224Z">
+<meta property="og:updated_time" content="2019-07-05T09:50:04.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="无锡">
-<meta name="twitter:description" content="一座小城，无事可记 = =🐳🐳🐳">
+<meta name="twitter:title" content="关于缓存策略">
+<meta name="twitter:description" content="缓存缓存主要用于解决高并发，大数据场景下，热点数据访问的性能问题。提供高性能的数据快速访问。 缓存的过期策略主要有FIFO、LFU、LRU三种。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/无锡/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/19/cache/"/>
 
 
 
 
 
-  <title>无锡 | Xia.Blog()</title>
+  <title>关于缓存策略 | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/无锡/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/cache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">无锡</h1>
+          <h1 class="post-title" itemprop="name headline">关于缓存策略</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:37:01+08:00">
-                2019-06-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-19T09:31:00+08:00">
+                2018-05-19
               </time>
             
 
@@ -324,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
                   </a>
                 </span>
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/28/无锡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/28/无锡/" itemprop="commentCount"></span>
+                <a href="/2018/05/19/cache/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/19/cache/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,49 @@
       
 
       
-        <h2 id="一座小城，无事可记"><a href="#一座小城，无事可记" class="headerlink" title="一座小城，无事可记 = ="></a>一座小城，无事可记 = =</h2><p>🐳🐳🐳</p>
+        <h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存主要用于解决高并发，大数据场景下，热点数据访问的性能问题。提供高性能的数据快速访问。</p>
+<p>缓存的过期策略主要有FIFO、LFU、LRU三种。<br><a id="more"></a></p>
+<ul>
+<li><p>FIFO</p>
+<p> 按照“先进先出（First In，First Out）”的原理淘汰数据，正好符合队列的特性，数据结构上使用队列Queue来实现。</p>
+<ol>
+<li><p>新访问的数据插入FIFO队列尾部，数据在FIFO队列中顺序移动；</p>
+</li>
+<li><p>淘汰FIFO队列头部的数据；</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>LRU</p>
+<p>  （Least recently used，最近最少使用）算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。<br>  最常见的实现是使用一个链表保存缓存数据，详细算法实现如下：</p>
+<ol>
+<li><p>新数据插入到链表头部；</p>
+</li>
+<li><p>每当缓存命中（即缓存数据被访问），则将数据移到链表头部；</p>
+</li>
+<li><p>当链表满的时候，将链表尾部的数据丢弃。</p>
+</li>
+</ol>
+</li>
+<li><p>LFU</p>
+<p>  （Least Frequently Used）算法根据数据的历史访问频率来淘汰数据，其核心思想是“如果数据过去被访问多次，那么将来被访问的频率也更高”。</p>
+<p>  LFU的每个数据块都有一个引用计数，所有数据块按照引用计数排序，具有相同引用计数的数据块则按照时间排序。</p>
+</li>
+</ul>
+<h2 id="Caffine"><a href="#Caffine" class="headerlink" title="Caffine"></a>Caffine</h2><h2 id="驱逐策略"><a href="#驱逐策略" class="headerlink" title="驱逐策略"></a>驱逐策略</h2><p>缓存的驱逐策略是为了预测哪些数据在短期内最可能被再次用到，从而提升缓存的命中率。由于简洁的实现、高效的运行时表现以及在常规的使用场景下有不错的命中率，LRU策略或许是最流行的驱逐策略。但LRU通过历史数据来预测未来是局限的，它会认为最后到来的数据是最可能被再次访问的，从而给与它最高的优先级。<br>现代缓存扩展了对历史数据的使用，结合就近程度（recency）和访问频次（frequency）来更好的预测数据。其中一种保留历史信息的方式是使用popularity sketch（一种压缩、概率性的数据结构）来从一大堆访问事件中定位频繁的访问者。可以参考CountMin Sketch算法，它由计数矩阵和多个哈希方法实现。发生一次读取时，矩阵中每行对应的计数器增加计数，估算频率时，取数据对应是所有行中计数的最小值。这个方法让我们从空间、效率、以及适配矩阵的长宽引起的哈希碰撞的错误率上做权衡。</p>
+<ul>
+<li><p>CountMin Sketch</p>
+<p> Window TinyLFU（W-TinyLFU）算法将sketch作为过滤器，当新来的数据比要驱逐的数据高频时，这个数据才会被缓存接纳。这个许可窗口给予每个数据项积累热度的机会，而不是立即过滤掉。这避免了持续的未命中，特别是在突然流量暴涨的的场景中，一些短暂的重复流量就不会被长期保留。为了刷新历史数据，一个时间衰减进程被周期性或增量的执行，给所有计数器减半。</p>
+</li>
+</ul>
+<ul>
+<li><p>Window TinyLFU</p>
+<p>对于长期保留的数据，W-TinyLFU使用了分段LRU（Segmented LRU，缩写SLRU）策略。起初，一个数据项存储被存储在试用段（probationary segment）中，在后续被访问到时，它会被提升到保护段（protected segment）中。保护段满后，有的数据会被淘汰回试用段，这也可能级联的触发试用段的淘汰。这套机制确保了访问间隔小的热数据被保存下来，而被重复访问少的冷数据则被回收。</p>
+</li>
+</ul>
+<h2 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h2><p>过期的实现里，往往每个数据项拥有不同的过期时间。因为容量的限制，过期后数据需要被懒淘汰，否则这些已过期的脏数据会污染到整个缓存。一般缓存中会启用专有的清扫线程周期性的遍历清理缓存。这个策略相比在每次读写操作时按照过期时间排序的优先队列来清理过期缓存要好，因为后台线程隐藏了的过期数据清除的时间开销。<br>鉴于大多数场景里不同数据项使用的都是固定的过期时长，Caffien采用了统一过期时间的方式。这个限制让用O（1）的有序队列组织数据成为可能。针对数据的写后过期，维护了一个写入顺序队列，针对读后过期，维护了一个读取顺序队列。缓存能复用驱逐策略下的队列以及下面将要介绍的并发机制，让过期的数据项在缓存的维护阶段被抛弃掉。</p>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>由于在大多数的缓存策略中，数据的读取都会伴随对缓存状态的写操作，并发的缓存读取被视为一个难点问题。传统的解决方式是用同步锁。这可以通过将缓存的数据划成多个分区来进行锁拆分优化。不幸的是热点数据所持有的锁会比其他数据更常的被占有，在这种场景下锁拆分的性能提升也就没那么好了。当单个锁的竞争成为瓶颈后，接下来的经典的优化方式是只更新单个数据的元数据信息，以及使用随机采样、基于FIFO的驱逐策略来减少数据操作。这些策略会带来高性能的读和低性能的写，同时在选择驱逐对象时也比较困难。<br>另一种可行方案来自于数据库理论，通过提交日志的方式来扩展写的性能。写入操作先记入日志中，随后异步的批量执行，而不是立即写入到数据结构中。这种思想可以应用到缓存中，执行哈希表的操作，将操作记录到缓冲区，然后在合适的时机执行缓冲区中的内容。这个策略依然需要同步锁或者tryLock，不同的是把对锁的竞争转移到对缓冲区的追加写上。<br>在Caffeine中，有一组缓冲区被用来记录读写。一次访问首先会被因线程而异的哈希到stripped ring buffer上，当检测到竞争时，缓冲区会自动扩容。一个ring buffer容量满载后，会触发异步的执行操作，而后续的对该ring buffer的写入会被丢弃，直到这个ring buffer可被使用。虽然因为ring buffer容量满而无法被记录该访问，但缓存值依然会返回给调用方。这种策略信息的丢失不会带来大的影响，因为W-TinyLFU能识别出我们希望保存的热点数据。通过使用因线程而异的哈希算法替代在数据项的键上做哈希，缓存避免了瞬时的热点key的竞争问题。<br>写数据时，采用更传统的并发队列，每次变更会引起一次立即的执行。虽然数据的损失是不可接受的，但我们仍然有很多方法可以来优化写缓冲区。所有类型的缓冲区都被多个的线程写入，但却通过单个线程来执行。这种多生产者/单个消费者的模式允许了更简单、高效的算法来实现。<br>缓冲区和细粒度的写带来了单个数据项的操作乱序的竞态条件。插入、读取、更新、删除都可能被各种顺序的重放，如果这个策略控制的不合适，则可能引起悬垂索引。解决方案是通过状态机来定义单个数据项的生命周期。<br>在基准测试中，缓冲区随着哈希表的增长而增长，它的的使用相对更节省资源。读的性能随着CPU的核数线性增长，是哈希表吞吐量的33%。写入有10%的性能损耗，这是因为更新哈希表时的竞争是最主要的开销。</p>
 
       
     </div>
@@ -389,7 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/日常/" rel="tag"><i class="fa fa-tag"></i> 日常</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
         </div>
       
@@ -402,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
-                <i class="fa fa-chevron-left"></i> OOM Killer
+              <a href="/2016/09/08/ThreadDump分析小结/" rel="next" title="ThreadDump分析小结">
+                <i class="fa fa-chevron-left"></i> ThreadDump分析小结
               </a>
             
           </div>
@@ -411,6 +453,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/08/JAVA-classloader/" rel="prev" title="JAVA ClassLoader">
+                JAVA ClassLoader <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -590,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一座小城，无事可记"><span class="nav-number">1.</span> <span class="nav-text">一座小城，无事可记 = =</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存"><span class="nav-number">1.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caffine"><span class="nav-number">2.</span> <span class="nav-text">Caffine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#驱逐策略"><span class="nav-number">3.</span> <span class="nav-text">驱逐策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过期策略"><span class="nav-number">4.</span> <span class="nav-text">过期策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发"><span class="nav-number">5.</span> <span class="nav-text">并发</span></a></li></ol></div>
             
 
           </div>
