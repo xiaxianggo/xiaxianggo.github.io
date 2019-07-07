@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="encrypt," />
+  <meta name="keywords" content="java," />
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
-<meta name="keywords" content="encrypt">
+<meta name="description" content="一、简介1、用netty作为通信框架2、集成spring mvc来处理http请求">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RSA加密解密以及秘钥的生成">
-<meta property="og:url" content="http://yoursite.com/2016/01/14/rsa/index.html">
+<meta property="og:title" content="Netty做HTTP server">
+<meta property="og:url" content="http://yoursite.com/2019/06/25/netty/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
+<meta property="og:description" content="一、简介1、用netty作为通信框架2、集成spring mvc来处理http请求">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-05T09:47:30.688Z">
+<meta property="og:updated_time" content="2019-07-07T10:54:33.264Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RSA加密解密以及秘钥的生成">
-<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334import javax.crypto.Cipher;import java.security.KeyPair;import java.security.KeyPairGenerator; public class Demo &amp;#123;     public static vo">
+<meta name="twitter:title" content="Netty做HTTP server">
+<meta name="twitter:description" content="一、简介1、用netty作为通信框架2、集成spring mvc来处理http请求">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/01/14/rsa/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/06/25/netty/"/>
 
 
 
 
 
-  <title>RSA加密解密以及秘钥的生成 | Xia.Blog()</title>
+  <title>Netty做HTTP server | Xia.Blog()</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/14/rsa/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/25/netty/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xia Xiang">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RSA加密解密以及秘钥的生成</h1>
+          <h1 class="post-title" itemprop="name headline">Netty做HTTP server</h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-14T09:31:00+08:00">
-                2016-01-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-25T11:21:00+08:00">
+                2019-06-25
               </time>
             
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/01/14/rsa/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/01/14/rsa/" itemprop="commentCount"></span>
+                <a href="/2019/06/25/netty/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/25/netty/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,8 +371,12 @@
       
 
       
-        <a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPair;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPairGenerator;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        d();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">d</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//生成密钥对</span></span><br><span class="line">        KeyPairGenerator keyGen = KeyPairGenerator.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        keyGen.initialize(<span class="number">2048</span>);</span><br><span class="line">        KeyPair key = keyGen.generateKeyPair();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 公钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pub = key.getPublic().getEncoded();</span><br><span class="line">        <span class="comment">// 私钥</span></span><br><span class="line">        <span class="keyword">byte</span>[] pri = key.getPrivate().getEncoded();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 原文</span></span><br><span class="line">        <span class="keyword">byte</span>[] plainText = <span class="string">"你看看"</span>.getBytes();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//加密工具</span></span><br><span class="line">        Cipher c1 = Cipher.getInstance(<span class="string">"RSA"</span>);</span><br><span class="line">        c1.init(Cipher.ENCRYPT_MODE, key.getPrivate());</span><br><span class="line">        <span class="keyword">byte</span>[] cipherText = c1.doFinal(plainText);</span><br><span class="line"> </span><br><span class="line">        c1.init(Cipher.DECRYPT_MODE, key.getPublic());</span><br><span class="line">        <span class="keyword">byte</span>[] output = c1.doFinal(cipherText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><h4 id="1、用netty作为通信框架"><a href="#1、用netty作为通信框架" class="headerlink" title="1、用netty作为通信框架"></a>1、用netty作为通信框架</h4><h4 id="2、集成spring-mvc来处理http请求"><a href="#2、集成spring-mvc来处理http请求" class="headerlink" title="2、集成spring mvc来处理http请求"></a>2、集成spring mvc来处理http请求</h4><a id="more"></a>
+<h2 id="二、Server端"><a href="#二、Server端" class="headerlink" title="二、Server端"></a>二、Server端</h2><p>1、server接收端<br>正常启动netty server即可。netty的启动会阻塞后续的执行，所以单独建一个SingleThreadExecutor来执行start，这样不会阻塞主线程，也可以直接对线程池进行控制。</p>
+<p>netty接受到请求后转发给HttpServerHandler处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startBootstrap</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    EventLoopGroup bossGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">    EventLoopGroup workerGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ServerBootstrap bootstrap = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">        bootstrap.group(bossGroup, workerGroup);</span><br><span class="line">        bootstrap.channel(NioServerSocketChannel.class);</span><br><span class="line">        bootstrap.childHandler(<span class="keyword">new</span> ServletChannelInitializer());</span><br><span class="line">        bootstrap.option(ChannelOption.SO_BACKLOG, <span class="number">128</span>);</span><br><span class="line">        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        String[] addressArray = StringUtil.split(httpAddress, <span class="string">":"</span>);</span><br><span class="line">        String ip = addressArray[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> port = Integer.parseInt(addressArray[<span class="number">1</span>]);</span><br><span class="line">        ChannelFuture future = bootstrap.bind(ip, port).sync();</span><br><span class="line">        LOGGER.info(<span class="string">"HTTP srver started on ip:"</span> + ip + <span class="string">", port :"</span> + port);</span><br><span class="line">        future.channel().closeFuture().sync();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        workerGroup.shutdownGracefully();</span><br><span class="line">        bossGroup.shutdownGracefully();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initChannel</span><span class="params">(SocketChannel ch)</span> </span>&#123;</span><br><span class="line">     ch.pipeline().addLast(<span class="string">"decoder"</span>, <span class="keyword">new</span> HttpRequestDecoder());</span><br><span class="line">     ch.pipeline().addLast(<span class="string">"aggregator"</span>, <span class="keyword">new</span> HttpObjectAggregator(<span class="number">65536</span>));</span><br><span class="line">     ch.pipeline().addLast(<span class="string">"encoder"</span>, <span class="keyword">new</span> HttpResponseEncoder());</span><br><span class="line">     ch.pipeline().addLast(<span class="string">"chunkedWriter"</span>, <span class="keyword">new</span> ChunkedWriteHandler());</span><br><span class="line">     ch.pipeline().addLast(<span class="string">"httpServerHandler"</span>, <span class="keyword">new</span> HttpServerHandler(dispatcherServlet));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>HttpServerHandler收到FullHttpRequest后，转换成spring的MockHttpServletRequest(必须是ServletRequest，才可以做后续的解析和转发)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">MockHttpServletRequest servletRequest = createServletRequest(request);</span><br><span class="line">MockHttpServletResponse servletResponse = <span class="keyword">new</span> MockHttpServletResponse();</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.servlet.service(servletRequest, servletResponse);  <span class="comment">//自定义servlet处理request和response</span></span><br><span class="line"></span><br><span class="line">HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse.getStatus());</span><br><span class="line">DefaultFullHttpResponse response = <span class="keyword">new</span> DefaultFullHttpResponse(HTTP_1_1, status,</span><br><span class="line">        Unpooled.wrappedBuffer(servletResponse.getContentAsByteArray()));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String name : servletResponse.getHeaderNames()) &#123;</span><br><span class="line">    <span class="keyword">for</span> (Object value : servletResponse.getHeaderValues(name)) &#123;</span><br><span class="line">        response.headers().add(name, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ChannelFuture writeFuture = ctx.write(response);</span><br><span class="line">writeFuture.addListener(ChannelFutureListener.CLOSE);</span><br></pre></td></tr></table></figure></p>
+<p>Spring配置好扫描路径，在Controller的类和方法中加入SpringMVC的相应注解，</p>
+<p>通过this.servlet.service(servletRequest, servletResponse)将request转发至自定义的dispatcher，处理request后，便能正常转发至Controller中执行。</p>
 
       
     </div>
@@ -390,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/encrypt/" rel="tag"><i class="fa fa-tag"></i> encrypt</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
         </div>
       
@@ -403,15 +407,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/01/oom/" rel="next" title="OOM Killer">
+                <i class="fa fa-chevron-left"></i> OOM Killer
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/28/无锡/" rel="prev" title="无锡">
-                无锡 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-number">1.</span> <span class="nav-text">一、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、用netty作为通信框架"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、用netty作为通信框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、集成spring-mvc来处理http请求"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、集成spring mvc来处理http请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Server端"><span class="nav-number">2.</span> <span class="nav-text">二、Server端</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

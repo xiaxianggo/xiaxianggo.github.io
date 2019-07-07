@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="OOM Killer原理">
+<meta name="description" content="宕机判断与预处理OOM Killer原理">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OOM Killer">
 <meta property="og:url" content="http://yoursite.com/2019/03/01/oom/index.html">
 <meta property="og:site_name" content="Xia.Blog()">
-<meta property="og:description" content="OOM Killer原理">
+<meta property="og:description" content="宕机判断与预处理OOM Killer原理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-07T10:18:11.486Z">
+<meta property="og:updated_time" content="2019-07-07T10:37:45.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OOM Killer">
-<meta name="twitter:description" content="OOM Killer原理">
+<meta name="twitter:description" content="宕机判断与预处理OOM Killer原理">
 
 
 
@@ -371,7 +371,7 @@
       
 
       
-        <h3 id="OOM-Killer原理"><a href="#OOM-Killer原理" class="headerlink" title="OOM Killer原理"></a>OOM Killer原理<a id="more"></a></h3><ul>
+        <h2 id="宕机判断与预处理"><a href="#宕机判断与预处理" class="headerlink" title="宕机判断与预处理"></a>宕机判断与预处理</h2><h3 id="OOM-Killer原理"><a href="#OOM-Killer原理" class="headerlink" title="OOM Killer原理"></a>OOM Killer原理<a id="more"></a></h3><ul>
 <li>当物理内存和交换空间爆满时，OOM Killer会计算每个进程的oom_score并选择杀死进程。oom_score的值越大就越有可能被 OOM Killer 选中。这里列举两个主要因素：</li>
 </ul>
 <p>进程消耗的内存越大，oom_score越大<br>进程运行消耗的CPU时间越小，oom_score越大</p>
@@ -433,6 +433,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/25/netty/" rel="prev" title="Netty做HTTP server">
+                Netty做HTTP server <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -522,7 +526,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -612,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OOM-Killer原理"><span class="nav-number">1.</span> <span class="nav-text">OOM Killer原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存溢出OOM判断和dump获取"><span class="nav-number">1.1.</span> <span class="nav-text">内存溢出OOM判断和dump获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照以下办法判断是因为内存溢出导致的宕机"><span class="nav-number">1.2.</span> <span class="nav-text">按照以下办法判断是因为内存溢出导致的宕机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统的OOM-Killer"><span class="nav-number">2.</span> <span class="nav-text">系统的OOM Killer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试方法"><span class="nav-number">2.1.</span> <span class="nav-text">测试方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监测宕机-（信号量-JVM-Shutdown-Hook）"><span class="nav-number">2.2.</span> <span class="nav-text">监测宕机 （信号量 + JVM Shutdown Hook）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#宕机判断与预处理"><span class="nav-number">1.</span> <span class="nav-text">宕机判断与预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OOM-Killer原理"><span class="nav-number">1.1.</span> <span class="nav-text">OOM Killer原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存溢出OOM判断和dump获取"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存溢出OOM判断和dump获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照以下办法判断是因为内存溢出导致的宕机"><span class="nav-number">1.1.2.</span> <span class="nav-text">按照以下办法判断是因为内存溢出导致的宕机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统的OOM-Killer"><span class="nav-number">1.2.</span> <span class="nav-text">系统的OOM Killer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">测试方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监测宕机-（信号量-JVM-Shutdown-Hook）"><span class="nav-number">1.2.2.</span> <span class="nav-text">监测宕机 （信号量 + JVM Shutdown Hook）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
